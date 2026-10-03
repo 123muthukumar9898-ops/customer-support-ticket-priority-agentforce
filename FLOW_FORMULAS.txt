@@ -1,0 +1,34 @@
+Formula PriorityF (Text)
+
+IF(OR(
+CONTAINS(LOWER({!$Record.subject__c}),"urgent"),
+CONTAINS(LOWER({!$Record.subject__c}),"crash"),
+CONTAINS(LOWER({!$Record.subject__c}),"down"),
+CONTAINS(LOWER({!$Record.subject__c}),"payment failed")
+),"Critical",
+IF(OR(
+ISPICKVAL({!$Record.custumer_type__c},"Premium"),
+ISPICKVAL({!$Record.category__c},"Billing"),
+ISPICKVAL({!$Record.category__c},"Refund")
+),"High",
+IF(OR(
+ISPICKVAL({!$Record.category__c},"Technical Issue"),
+ISPICKVAL({!$Record.category__c},"Account Access")
+),"Medium","Low")))
+
+
+Formula ScoreF (Number, 0 decimal places)
+
+IF({!PriorityF}="Critical",90,
+IF({!PriorityF}="High",70,
+IF({!PriorityF}="Medium",50,20)))
+
+
+Formula TeamF (Text)
+
+IF(OR(
+ISPICKVAL({!$Record.category__c},"Billing"),
+ISPICKVAL({!$Record.category__c},"Refund")
+),"Billing Support",
+IF(ISPICKVAL({!$Record.category__c},"Account Access"),
+"Account Support","Technical Support"))

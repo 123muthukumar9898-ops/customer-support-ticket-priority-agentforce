@@ -1,0 +1,4 @@
+Ticket Number,Subject,Category,Customer Type,Expected Predict Priority,Expected Score,Expected Assigned Team
+TKT-0003,payment failed refund,Refund,Paid,Critical,90,Billing Support
+TKT-0007,app crash on checkout,Technical Issue,Paid,Critical,90,Technical Support
+TKT-0004,how to change profile,Other,Free,Low,20,Technical Support
